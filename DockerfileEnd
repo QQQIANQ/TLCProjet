@@ -1,0 +1,11 @@
+FROM alpine
+
+RUN apk --update add openjdk11-jre
+
+COPY doodlestudent/api/target /api
+EXPOSE 8080
+
+COPY doodlestudent/api/src/main/resources /api/config
+WORKDIR /api/
+#on execute le jar et on override l url de la base de donnee, par defaut l url est 127.0.0.1 alors que la bdd est sur une autre machine
+CMD ["java", "-jar","/api/tlcdemoApp-1.0.0-SNAPSHOT-runner.jar","-Dquarkus.datasource.jdbc.url=jdbc:mysql://db:3306/tlc?useUnicode=true&serverTimezone=Europe/Paris"]

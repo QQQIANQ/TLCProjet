@@ -1,0 +1,3 @@
+FROM nginx:alpine
+COPY doodlestudent/front/dist/tlcfront /usr/share/nginx/html
+EXPOSE 80 443
